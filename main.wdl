@@ -33,7 +33,7 @@ task runDragon {
     }
 
     runtime {
-        docker: "blawney/dragon"
+        docker: "blawney/dragon:abc"
         cpu: 4
         memory: "30 G"
         disks: "local-disk " + disk_size + " HDD"
