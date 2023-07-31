@@ -2,11 +2,13 @@ workflow Dragon {
 
     File input_matrix_a
     File input_matrix_b
+    String sample_arrangement
 
     call runDragon {
         input:
             input_matrix_a = input_matrix_a,
-            input_matrix_b = input_matrix_b
+            input_matrix_b = input_matrix_b,
+            sample_arrangement = sample_arrangement
     }
 
     output {
@@ -19,6 +21,7 @@ task runDragon {
         
     File input_matrix_a
     File input_matrix_b
+    String sample_arrangement
 
     Int disk_size = 50
 
