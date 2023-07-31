@@ -1,0 +1,60 @@
+{
+    "name": "DRAGON (multi-omic regulatory inference)", 
+    "description": "DRAGON (Determining Regulatory Associations using Graphical models on multi-Omic Networks) is a network-based method based on Gaussian Graphical Models which facilitates the joint analysis of paired omics (e.g. expression and methylation) data. For more information, please see <a href=\"https://netzoo.github.io/zooanimals/dragon/\">https://netzoo.github.io/zooanimals/dragon/</a>. For this WebMeV implementation, we expect two input matrices such as expression and methylation or expression and miRNA expression. Note that we expect your matrices to either have the same sample IDs OR are sorted in the same manner.", 
+    "inputs": {
+        "Dragon.input_matrix_a": {
+            "description": "An input matrix. For example, a gene expression or methylation matrix for a cohort of samples.", 
+            "name": "Input matrix 1:", 
+            "required": true, 
+            "converter": "api.converters.data_resource.CromwellSingleVariableDataResourceConverter",
+            "spec": {
+                "attribute_type": "VariableDataResource", 
+                "resource_types": ["MTX","I_MTX", "EXP_MTX", "RNASEQ_COUNT_MTX"], 
+                "many": false
+            }
+        }, 
+        "Dragon.input_matrix_b": {
+            "description": "Another input matrix. For example, a gene expression or methylation matrix for a cohort of samples.", 
+            "name": "Input matrix 2:", 
+            "required": true, 
+            "converter": "api.converters.data_resource.CromwellSingleVariableDataResourceConverter",
+            "spec": {
+                "attribute_type": "VariableDataResource", 
+                "resource_types": ["MTX","I_MTX", "EXP_MTX", "RNASEQ_COUNT_MTX"], 
+                "many": false
+            }
+        }, 
+        "Dragon.sample_arrangement": {
+            "description": "Are the matrices aligned by sample ID or sorting? If sorting, we ignore the sample IDs (column headers) and assume both matrices are arranged such that corresponding columns of both matrices refer to the same sample.", 
+            "name": "Matrix sorting:", 
+            "required": true, 
+            "converter": "api.converters.basic_attributes.StringConverter",
+            "spec": {
+                "attribute_type": "OptionString",
+                "options": ["sample ID","sorted"]
+            }
+        }
+    }, 
+    "outputs": {
+        "Dragon.edge_weights": {
+            "required": true,
+            "converter": "api.converters.data_resource.CromwellSingleDataResourceConverter",
+            "spec": {
+                "attribute_type": "DataResource", 
+                "resource_type": "NS",
+                "many": false
+            }
+        },
+        "Dragon.fdr_values": {
+            "required": true,
+            "converter": "api.converters.data_resource.CromwellSingleDataResourceConverter",
+            "spec": {
+                "attribute_type": "DataResource", 
+                "resource_type": "MTX",
+                "many": false
+            }
+        }
+    }, 
+    "mode": "cromwell",
+    "workspace_operation": true
+}
