@@ -27,7 +27,8 @@ task runDragon {
 
     command <<<
         python3 /opt/software/dragon.py -a ${input_matrix_a} \
-            -b ${input_matrix_b}
+            -b ${input_matrix_b} \
+            -s "${sample_arrangement}"
     >>>
 
     output {
