@@ -37,7 +37,7 @@ task runDragon {
     }
 
     runtime {
-        docker: "blawney/dragon:abc"
+        docker: "ghcr.io/web-mev/mev-dragon"
         cpu: 4
         memory: "30 G"
         disks: "local-disk " + disk_size + " HDD"
