@@ -12,7 +12,7 @@ workflow Dragon {
     }
 
     output {
-        #File fdr_values = runDragon.fdr_values
+        File fdr_values = runDragon.fdr_values
         File edge_weights = runDragon.edge_weights
     }
 }
@@ -32,8 +32,8 @@ task runDragon {
     >>>
 
     output {
-        #File fdr_values = "adj_pvals.tsv"
-        File edge_weights = "partial_corr.tsv"
+        File fdr_values = "dragon_adj_pvals.tsv"
+        File edge_weights = "dragon_partial_correlations.tsv"
     }
 
     runtime {

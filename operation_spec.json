@@ -44,6 +44,15 @@
                 "resource_type": "NS",
                 "many": false
             }
+        },
+        "Dragon.fdr_values": {
+            "required": true,
+            "converter": "api.converters.data_resource.CromwellSingleDataResourceConverter",
+            "spec": {
+                "attribute_type": "DataResource", 
+                "resource_type": "NS",
+                "many": false
+            }
         }
     }, 
     "mode": "cromwell",
