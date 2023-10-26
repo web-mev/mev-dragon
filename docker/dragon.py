@@ -87,13 +87,14 @@ if __name__ == '__main__':
             ' samples.')
         sys.exit(1)
     
-    # create a bipartiate network
-    partial_corr_df = pd.DataFrame(partial_corr[:feature_num_a, feature_num_a:],
-                                   index=df_a.index,
-                                   columns=df_b.index)
-    padj_df = pd.DataFrame(adj_p_vals[:feature_num_a, feature_num_a:],
-                                   index=df_a.index,
-                                   columns=df_b.index)
+    # create dataframes from those numpy arrays:
+    combined_index = np.hstack([df_a.index, df_b.index])
+    partial_corr_df = pd.DataFrame(partial_corr,
+                                   index=combined_index,
+                                   columns=combined_index)
+    padj_df = pd.DataFrame(adj_p_vals,
+                                   index=combined_index,
+                                   columns=combined_index)
     partial_corr_df.to_csv('partial_corr.tsv', sep='\t')
     padj_df.to_csv('adj_pvals.tsv', sep='\t')
     
