@@ -95,6 +95,6 @@ if __name__ == '__main__':
     padj_df = pd.DataFrame(adj_p_vals,
                                    index=combined_index,
                                    columns=combined_index)
-    partial_corr_df.to_csv('partial_corr.tsv', sep='\t')
-    padj_df.to_csv('adj_pvals.tsv', sep='\t')
+    partial_corr_df.to_csv('dragon_partial_correlations.tsv', sep='\t')
+    padj_df.to_csv('dragon_adj_pvals.tsv', sep='\t')
     
