@@ -38,8 +38,8 @@ task runDragon {
 
     runtime {
         docker: "ghcr.io/web-mev/mev-dragon"
-        cpu: 4
-        memory: "30 G"
+        cpu: 32
+        memory: "96 G"
         disks: "local-disk " + disk_size + " HDD"
     }
 }
