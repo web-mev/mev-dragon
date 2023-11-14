@@ -56,8 +56,8 @@ if __name__ == '__main__':
     # such that the features are in the COLUMNS,
     # which is transpose of the typical convention of WebMeV
     # where we have genes x samples in rows x columns, respectively.
-    matrix_a = Scale(np.transpose(df_a.values))
-    matrix_b = Scale(np.transpose(df_b.values))
+    matrix_a = Scale(np.transpose(df_a.values)).astype('float16')
+    matrix_b = Scale(np.transpose(df_b.values)).astype('float16')
 
     N0 = matrix_a.shape[0]
     N1 = matrix_b.shape[0]
