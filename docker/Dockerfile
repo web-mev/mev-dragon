@@ -1,4 +1,4 @@
-FROM debian:bullseye
+FROM debian:bookworm
 
 SHELL ["/bin/bash", "-c"]
 
@@ -15,9 +15,9 @@ RUN mkdir -p /opt/software
 ADD dragon.py /opt/software/ 
 
 # Install the NetZoo python library
-RUN wget https://github.com/netZoo/netZooPy/archive/refs/tags/0.9.15.tar.gz \
+RUN wget https://github.com/netZoo/netZooPy/archive/refs/tags/0.10.0.tar.gz \
     -P /opt/software && \
-    tar xzvf /opt/software/0.9.15.tar.gz -C /opt/software && \
-    pip3 install -e /opt/software/netZooPy-0.9.15/ 
+    tar xzvf /opt/software/0.10.0.tar.gz -C /opt/software && \
+    pip3 install -e /opt/software/netZooPy-0.10.0/ 
     
 RUN pip3 install joblib
