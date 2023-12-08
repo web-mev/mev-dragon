@@ -26,7 +26,7 @@ task runDragon {
     Int disk_size = 50
 
     command <<<
-        python3 /opt/software/dragon.py -a ${input_matrix_a} \
+        /opt/pipx/venvs/netzoopy/bin/python3 /opt/software/dragon.py -a ${input_matrix_a} \
             -b ${input_matrix_b} \
             -s "${sample_arrangement}"
     >>>
@@ -38,7 +38,7 @@ task runDragon {
 
     runtime {
         docker: "ghcr.io/web-mev/mev-dragon"
-        cpu: 32
+        cpu: 42
         memory: "96 G"
         disks: "local-disk " + disk_size + " HDD"
     }

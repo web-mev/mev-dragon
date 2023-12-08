@@ -52,12 +52,34 @@ if __name__ == '__main__':
             # of matrix B to match that of matrix A:
             df_b = df_b[df_a.columns]
 
+    # zero-variance and nan values can cause issues downstream. Remove
+    # these features.
+
+    # calculate the std dev of each feature/row
+    df_a_std = np.std(df_a.values, axis=1)
+    df_b_std = np.std(df_b.values, axis=1)
+
+    # check if the variance is smaller than the machine epsilon
+    var_too_small_a = df_a_std < sys.float_info.epsilon
+    var_too_small_b = df_b_std < sys.float_info.epsilon
+
+    # can also have nan values so flag those
+    var_is_na_a = np.isnan(df_a_std)
+    var_is_na_b = np.isnan(df_b_std)
+
+    # remove the rows/features which are either effectively
+    # zero variance or nan
+    keep_a = (~var_too_small_a) & (~var_is_na_a)
+    keep_b = (~var_too_small_b) & (~var_is_na_b)
+    df_a = df_a.iloc[keep_a]
+    df_b = df_b.iloc[keep_b]
+
     # We need to transpose the dataframes
     # such that the features are in the COLUMNS,
     # which is transpose of the typical convention of WebMeV
     # where we have genes x samples in rows x columns, respectively.
-    matrix_a = Scale(np.transpose(df_a.values)).astype('float16')
-    matrix_b = Scale(np.transpose(df_b.values)).astype('float16')
+    matrix_a = Scale(np.transpose(df_a.values))
+    matrix_b = Scale(np.transpose(df_b.values))
 
     N0 = matrix_a.shape[0]
     N1 = matrix_b.shape[0]
